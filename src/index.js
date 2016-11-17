@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
@@ -24,9 +25,10 @@ class App extends Component {
   }
 
   render() {
+    const videoSeach = _.debounce((term)=> {this.videoSearch(term)},300);
     return (
       <div>
-        <Searchbar onSearchTermchange={term => this.videoSearch(term)}/>
+        <Searchbar onSearchTermchange={videoSeach}/>
         <VideoDetail video={this.state.selectedVideo}  />
         <VideoList
           onVideoSelect={selectedVideo => this.setState({selectedVideo})}
